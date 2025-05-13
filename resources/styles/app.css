@@ -1,0 +1,140 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  * {
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 200ms;
+    font-family: "Source Serif 4", serif;
+  }
+
+  h2 {
+    @apply text-3xl lg:text-4xl font-bold;
+  }
+
+  * p,
+  * ul {
+    @apply text-base mb-5 font-source;
+  }
+
+  .e-content h2 {
+    @apply mb-5;
+  }
+
+  ul {
+    @apply mb-5;
+  }
+
+  ul li {
+    @apply list-disc list-inside;
+  }
+}
+
+.logged-in header {
+  @apply top-12 lg:top-8;
+}
+
+.wpcf7-form-control {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.wpcf7-textarea {
+  min-height: 100px;
+  max-height: 150px;
+}
+
+.wpcf7-submit {
+  border: 1px solid black;
+  color: black;
+  padding: 0.5rem 1rem;
+}
+
+.wpcf7-submit:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.wpcf7 p {
+  margin-bottom: 0;
+}
+
+#breadcrumbs {
+  color: white;
+  font-size: 14px;
+  transition: none;
+}
+
+.wp-block-heading.has-text-align-center {
+  @apply text-center;
+}
+
+.splide__arrow {
+  background: white;
+}
+
+.splide__arrow--next {
+  right: 0;
+}
+
+.splide__arrow--prev {
+  left: 0;
+}
+
+ol {
+  @apply list-decimal list-inside;
+}
+
+.wpcf7-list-item {
+  @apply m-0 block;
+}
+
+.wpcf7-list-item input {
+  @apply text-black focus:ring-black;
+}
+
+.wpcf7-spinner::before {
+  display: none;
+}
+
+/* Add a new custom CF7 loader */
+.wpcf7-spinner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border-top: 2px solid #262b2e;
+  border-right: 2px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  background-color: inherit;
+  position: relative;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Style the new loader element */
+.wpcf7-spinner::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border-bottom: 2px solid #FF3D00;
+  border-left: 2px solid transparent;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
