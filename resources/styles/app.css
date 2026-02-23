@@ -1,6 +1,6 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   * {
@@ -8,6 +8,7 @@
     transition-timing-function: ease-in-out;
     transition-duration: 200ms;
     font-family: "Source Serif 4", serif;
+    scroll-behavior: smooth;
   }
 
   h2 {
@@ -31,19 +32,41 @@
     @apply list-disc list-inside;
   }
 }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-delay {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in-delay 1s ease-out 0.3s forwards;
+  opacity: 0;
+}
 
 .logged-in header {
   @apply top-12 lg:top-8;
-}
-
-.wpcf7-form-control {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.wpcf7-textarea {
-  min-height: 100px;
-  max-height: 150px;
 }
 
 .wpcf7-submit {
@@ -96,39 +119,6 @@ ol {
   @apply text-black focus:ring-black;
 }
 
-.wpcf7-spinner::before {
-  display: none;
-}
-
-/* Add a new custom CF7 loader */
-.wpcf7-spinner {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border-top: 2px solid #262b2e;
-  border-right: 2px solid transparent;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-  background-color: inherit;
-  position: relative;
-  margin: 0 auto;
-  display: block;
-}
-
-/* Style the new loader element */
-.wpcf7-spinner::after {
-  content: '';
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border-bottom: 2px solid #FF3D00;
-  border-left: 2px solid transparent;
-}
-
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -137,4 +127,82 @@ ol {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.wpcf7-form-control {
+  @apply mb-0;
+}
+
+.input-wrapper {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8;
+}
+
+.wpcf7-form label {
+  @apply block text-sm font-semibold text-gray-700 transition-all duration-300;
+}
+
+.wpcf7-form label:hover {
+  @apply text-gray-900;
+}
+
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="tel"],
+.wpcf7-form input[type="email"] {
+  @apply h-10;
+}
+
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="tel"],
+.wpcf7-form input[type="email"],
+.wpcf7-form textarea {
+  @apply w-full px-4 py-3 mt-3 border-2 border-gray-200 font-normal focus:border-none focus:ring-4 focus:ring-blue-500/20 focus:outline-none transition-all duration-300;
+}
+
+.wpcf7-form input[type="text"]:hover,
+.wpcf7-form input[type="tel"]:hover,
+.wpcf7-form input[type="email"]:hover,
+.wpcf7-form textarea:hover {
+  @apply border-gray-300 bg-white/90;
+}
+
+.wpcf7-form textarea {
+  @apply h-[100px] resize-none;
+}
+
+.wpcf7-form .wpcf7-not-valid-tip {
+  @apply text-red-500 text-sm mt-1 font-medium;
+}
+
+.wpcf7-form .wpcf7-response-output {
+  @apply mt-6 p-4 rounded-lg font-medium;
+}
+
+.wpcf7-form .wpcf7-response-output.wpcf7-mail-sent-ok {
+  @apply bg-green-100 text-green-800 border border-green-200;
+}
+
+.wpcf7-form .wpcf7-response-output.wpcf7-validation-errors {
+  @apply bg-red-100 text-red-800 border border-red-200;
+}
+
+.wpcf7-spinner {
+  @apply absolute bottom-2.5 right-[28%];
+}
+
+@media (width <=768px) {
+  .wpcf7-form {
+    @apply p-1.5 md:p-6;
+  }
+
+  .input-wrapper {
+    @apply gap-4;
+  }
+}
+
+.wpcf7-form input[type="submit"] {
+  @apply bg-black max-w-[200px] block mx-auto w-full text-white hover:scale-105 transition-all duration-300 mt-4 rounded-full;
+}
+
+.has-text-align-center {
+  text-align: center;
 }

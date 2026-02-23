@@ -34,16 +34,16 @@ $webroot_dir = $root_dir . '/public';
  * .env.local will override .env if it exists
  */
 $env_files = file_exists($root_dir . '/.env.local')
-    ? ['.env', '.env.local']
-    : ['.env'];
+  ? ['.env', '.env.local']
+  : ['.env'];
 
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir, $env_files, false);
 if (file_exists($root_dir . '/.env')) {
-    $dotenv->load();
-    $dotenv->required(['WP_HOME', 'WP_SITEURL']);
-    if (!env('DATABASE_URL')) {
-        $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
-    }
+  $dotenv->load();
+  $dotenv->required(['WP_HOME', 'WP_SITEURL']);
+  if (!env('DATABASE_URL')) {
+    $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
+  }
 }
 
 /**
@@ -82,12 +82,12 @@ Config::define('DB_COLLATE', '');
 $table_prefix = env('DB_PREFIX') ?: 'wp_';
 
 if (env('DATABASE_URL')) {
-    $dsn = (object) parse_url(env('DATABASE_URL'));
+  $dsn = (object) parse_url(env('DATABASE_URL'));
 
-    Config::define('DB_NAME', substr($dsn->path, 1));
-    Config::define('DB_USER', $dsn->user);
-    Config::define('DB_PASSWORD', isset($dsn->pass) ? $dsn->pass : null);
-    Config::define('DB_HOST', isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
+  Config::define('DB_NAME', substr($dsn->path, 1));
+  Config::define('DB_USER', $dsn->user);
+  Config::define('DB_PASSWORD', isset($dsn->pass) ? $dsn->pass : null);
+  Config::define('DB_HOST', isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
 }
 
 /**
@@ -109,10 +109,10 @@ Config::define('AUTOMATIC_UPDATER_DISABLED', true);
 Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 
 // Disable the plugin and theme file editor in the admin
-Config::define('DISALLOW_FILE_EDIT', false);
+Config::define('DISALLOW_FILE_EDIT', true);
 
 // Disable plugin and theme updates and installation from the admin
-Config::define('DISALLOW_FILE_MODS', false);
+Config::define('DISALLOW_FILE_MODS', true);
 
 // Limit the number of post revisions
 Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
@@ -122,9 +122,9 @@ Config::define('WP_DEFAULT_THEME', 'radicle');
 
 // Configure stage switcher
 Config::define('ENVIRONMENTS', [
-    'development' => 'http://example.dev',
-    'staging'     => 'http://staging.example.com',
-    'production'  => 'http://example.com'
+  'development' => 'http://example.dev',
+  'staging'     => 'http://staging.example.com',
+  'production'  => 'http://example.com'
 ]);
 
 /**
@@ -140,13 +140,13 @@ ini_set('display_errors', '1');
  * See https://codex.wordpress.org/Function_Reference/is_ssl#Notes
  */
 if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
-    $_SERVER['HTTPS'] = 'on';
+  $_SERVER['HTTPS'] = 'on';
 }
 
 $env_config = __DIR__ . '/environments/' . WP_ENV . '.php';
 
 if (file_exists($env_config)) {
-    require_once $env_config;
+  require_once $env_config;
 }
 
 Config::apply();
@@ -155,5 +155,5 @@ Config::apply();
  * Bootstrap WordPress
  */
 if (!defined('ABSPATH')) {
-    define('ABSPATH', $webroot_dir . '/wp/');
+  define('ABSPATH', $webroot_dir . '/wp/');
 }

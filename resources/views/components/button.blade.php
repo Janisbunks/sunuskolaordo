@@ -4,7 +4,7 @@ if ($element === 'a' && !$attributes->has('href')) {
     $element = 'button';
 }
 
-$defaultClasses = 'inline-flex group justify-center gap-2 items-center font-bold';
+$defaultClasses = 'inline-flex group justify-center gap-2 items-center font-medium';
 
 $variants = [
     'white' => '',
@@ -14,7 +14,7 @@ $variants = [
 ];
 
 $sizes = [
-    'small' => 'py-3 px-6',
+    'small' => 'p-2.5 md:py-3 md:px-5',
     'base' => 'py-5 px-8',
     'rounded-full' => 'rounded-full w-10 h-10',
 ];

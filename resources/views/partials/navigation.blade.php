@@ -1,5 +1,5 @@
-<nav>
-  <div class="hidden lg:flex items-center gap-8">
+<nav class="flex-1 block">
+  <div class="hidden lg:flex items-center gap-8 justify-center">
       @foreach ($navigation as $item)
         @if ($item->children)
           <div x-data="{ open: false }" x-cloak @mouseenter="open = true" @mouseleave="open = false" class="relative !ml-0 !mr-6.25">

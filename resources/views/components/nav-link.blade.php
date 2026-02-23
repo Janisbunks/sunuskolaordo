@@ -2,8 +2,8 @@
 
 @php
 $classes = ($active ?? false)
-  ? 'inline-flex items-center text-white'
-  : 'inline-flex group gap-1 items-center text-white';
+  ? 'inline-flex items-center text-black'
+  : 'inline-flex group gap-1 items-center text-black';
 @endphp
 
 <a {{ $attributes->merge(['class' => $classes]) }}>

@@ -1,0 +1,63 @@
+global:
+  sql_adapter: wpcli
+
+local:
+  vhost: https://sunuskolaordo.test
+  wordpress_path: /Users/Janis/code/sunuskolaordo # use an absolute path here
+
+  database:
+    name: ordosunuskola
+    user: root
+    password: "" # could be blank, so always use quotes around
+    host: 127.0.0.1
+
+  paths:
+    wp_content: public/wp
+    uploads: public/content/uploads
+    plugins: public/content/plugins
+    mu_plugins: public/content/mu-plugins
+    themes: public/content/themes
+    languages: public/content/languages
+
+production:
+  vhost: https://www.sunuskolaordo.lv
+  wordpress_path: /home2/sunusko1/public_html # use an absolute path here
+
+  database:
+    name: sunusko1_db
+    user: sunusko1_user
+    password: "5GHeZgs@l%~V"
+    host: 127.0.0.1
+    # port: 3308 # Use just in case you have exotic server config
+    # mysqldump_options: '--max_allowed_packet=1G' # Only available if using SSH
+    # mysql_options: '--protocol=TCP' # mysql command is used to import db
+
+  exclude:
+    - ".git/"
+    - ".gitignore"
+    - ".gitmodules"
+    - ".env"
+    - "node_modules/"
+    - "bin/"
+    - "tmp/*"
+    - "Gemfile*"
+    - "Gemfile*"
+    - "Movefile"
+    - "movefile"
+    - "movefile.yml"
+    - "movefile.yaml"
+    - "wp-content/*.sql.gz"
+    - "*.orig"
+    - ".htaccess"
+
+  paths:
+    wp_content: public/wp
+    uploads: public/content/uploads
+    plugins: public/content/plugins
+    mu_plugins: public/content/mu-plugins
+    themes: public/content/themes
+    languages: public/content/languages
+
+  ssh:
+    host: 95.211.208.241
+    user: sunusko1
