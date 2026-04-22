@@ -88,4 +88,78 @@
       </div>
     </div>
   </div>
+
+  {{-- Floating Cart Button --}}
+  @include('partials.floating-cart')
+
+  {{-- Order Success Modal --}}
+  @if(isset($_GET['order_success']) && $_GET['order_success'] == '1')
+    <div x-data="{ show: true }"
+         x-show="show"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+         style="display: none;">
+
+      <div x-show="show"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="opacity-0 scale-90"
+           x-transition:enter-end="opacity-100 scale-100"
+           x-transition:leave="transition ease-in duration-200"
+           x-transition:leave-start="opacity-100 scale-100"
+           x-transition:leave-end="opacity-0 scale-90"
+           @click.away="show = false"
+           class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+
+        {{-- Close button --}}
+        <button @click="show = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        {{-- Success Icon --}}
+        <div class="flex justify-center mb-6">
+          <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center">
+            <svg class="w-12 h-12 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+        </div>
+
+        {{-- Title --}}
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Paldies!</h2>
+
+        {{-- Message --}}
+        <div class="text-center space-y-3 mb-8">
+          <p class="text-lg text-gray-700">
+            Jūsu pasūtījums ir veiksmīgi iesniegts!
+          </p>
+          <p class="text-gray-600">
+            Rēķins ir nosūtīts uz jūsu e-pastu.
+          </p>
+          <p class="text-gray-600">
+            Sazināsimies ar jums <strong class="text-emerald-600">1-2 darba dienu</strong> laikā, lai apstiprinātu pasūtījumu un piegādes detaļas.
+          </p>
+        </div>
+
+        {{-- Action Buttons --}}
+        <div class="space-y-3">
+          <a href="{{ url('/produkti') }}"
+             class="block w-full bg-emerald-600 text-white text-center py-3 rounded-xl font-semibold hover:bg-emerald-700 transition">
+            Turpināt Iepirkties
+          </a>
+          <button @click="show = false"
+                  class="block w-full bg-gray-100 text-gray-700 text-center py-3 rounded-xl font-semibold hover:bg-gray-200 transition">
+            Aizvērt
+          </button>
+        </div>
+
+      </div>
+    </div>
+  @endif
 </footer>

@@ -128,6 +128,30 @@ class Options extends Field
       ])
       ->endGroup()
 
+      ->addGroup('pamatpaklausibas_nodarbibas')
+      ->addRepeater('single_location')
+      ->addText('title', [
+        'label' => 'Vietas nosaukums (Akropole ...)'
+      ])
+      ->addText('date', [
+        'label' => 'No "Datums" · "Diena" · "laiks"'
+      ])
+      ->addText('space', [
+        'label' => 'Cik brīvas vietas?'
+      ])
+      ->endRepeater()
+      ->endGroup()
+
+      ->addGroup('product_variant')
+      ->addRepeater('variant', [
+        'label' => 'Izmēri un Cenas',
+        'layout' => 'table',
+      ])
+      ->addText('size', ['label' => 'Izmērs'])
+      ->addText('price', ['label' => 'Cena'])
+      ->endRepeater()
+      ->endGroup()
+
       ->addGroup('sertifikati')
       ->addRepeater('sertifikats')
       ->addText('title', [
