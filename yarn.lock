@@ -3974,10 +3974,15 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001517, caniuse-lite@^1.0.30001680, caniuse-lite@^1.0.30001702, caniuse-lite@^1.0.30001716:
-  version "1.0.30001718"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001718.tgz#dae13a9c80d517c30c6197515a96131c194d8f82"
-  integrity sha512-AflseV1ahcSunK53NfEs9gFWgOEmzr0f+kaMFA4xiLZlr9Hzt7HxcSpIFcnNCUkz6R6dWKa54rUz3HUmI3nVcw==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001517, caniuse-lite@^1.0.30001702, caniuse-lite@^1.0.30001716:
+  version "1.0.30001774"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001774.tgz"
+  integrity sha512-DDdwPGz99nmIEv216hKSgLD+D4ikHQHjBC/seF98N9CPqRX4M5mSxT9eTV6oyisnJcuzxtZy4n17yKKQYmYQOA==
+
+caniuse-lite@^1.0.30001774:
+  version "1.0.30001774"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001774.tgz#0e576b6f374063abcd499d202b9ba1301be29b70"
+  integrity sha512-DDdwPGz99nmIEv216hKSgLD+D4ikHQHjBC/seF98N9CPqRX4M5mSxT9eTV6oyisnJcuzxtZy4n17yKKQYmYQOA==
 
 capital-case@^1.0.4:
   version "1.0.4"
@@ -8773,6 +8778,11 @@ prettier@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.2.tgz#78fcecd6d870551aa5547437cdae39d4701dca5b"
   integrity sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ==
+
+prettier@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.8.1.tgz#edf48977cf991558f4fcbd8a3ba6015ba2a3a173"
+  integrity sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==
 
 pretty-format@29.6.3:
   version "29.6.3"
