@@ -2,20 +2,21 @@
     Template Name: Page With Sidebar
 --}}
 
-@extends('layouts.app')
+@extends ('layouts.app')
 
-@section('before-content')
+@section ('before-content')
 @endsection
 
-@section('content')
-    @while(have_posts()) @php(the_post())
-        @include('partials.page-header')
-        @includeFirst(['partials.content-page', 'partials.content'])
-    @endwhile
-    @section('sidebar')
-        @include('partials.sidebar')
-    @endsection
+@section ('content')
+  @while (have_posts())
+    @php (the_post())
+    @include ('partials.page-header')
+    @includeFirst (['partials.content-page', 'partials.content'])
+  @endwhile
+  @section ('sidebar')
+    @include ('partials.sidebar')
+  @endsection
 @endsection
 
-@section('after-content')
+@section ('after-content')
 @endsection

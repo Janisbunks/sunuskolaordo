@@ -21,11 +21,10 @@ $sizes = [
 @endphp
 
 <{{ $element }}
-    class="{{ $defaultClasses }} {{ $variants[$attributes->get('variant', 'white')] }} {{ $sizes[$attributes->get('size', 'base')] }} {{ $attributes->get('class') }}"
-
-    @foreach ($attributes->except(['class', 'variant', 'size', 'element']) as $key => $value)
-        {{ $key }}="{{ $value }}"
-    @endforeach
+  class="{{ $defaultClasses }} {{ $variants[$attributes->get('variant', 'white')] }} {{ $sizes[$attributes->get('size', 'base')] }} {{ $attributes->get('class') }}"
+  @foreach ($attributes->except(['class', 'variant', 'size', 'element']) as $key => $value)
+    {{ $key }}="{{ $value }}"
+  @endforeach
 >
-    {{ $slot }}
+  {{ $slot }}
 </{{ $element }}>

@@ -1,13 +1,13 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @layer base {
   * {
     transition-property: all;
     transition-timing-function: ease-in-out;
     transition-duration: 200ms;
-    font-family: "Source Serif 4", serif;
+    font-family: 'Source Serif 4', serif;
     scroll-behavior: smooth;
   }
 
@@ -145,28 +145,36 @@ ol {
   @apply text-gray-900;
 }
 
-.wpcf7-form input[type="text"],
-.wpcf7-form input[type="tel"],
-.wpcf7-form input[type="email"] {
+.wpcf7-form input[type='text'],
+.wpcf7-form input[type='tel'],
+.wpcf7-form input[type='email'] {
   @apply h-10;
 }
 
-.wpcf7-form input[type="text"],
-.wpcf7-form input[type="tel"],
-.wpcf7-form input[type="email"],
-.wpcf7-form textarea {
-  @apply w-full px-4 py-3 mt-3 border-2 border-gray-200 font-normal focus:border-none focus:ring-4 focus:ring-blue-500/20 focus:outline-none transition-all duration-300;
-}
-
-.wpcf7-form input[type="text"]:hover,
-.wpcf7-form input[type="tel"]:hover,
-.wpcf7-form input[type="email"]:hover,
-.wpcf7-form textarea:hover {
-  @apply border-gray-300 bg-white/90;
+.wpcf7-form input[type='text'],
+.wpcf7-form input[type='tel'],
+.wpcf7-form input[type='email'],
+.wpcf7-form textarea,
+.wpcf7-form select {
+  @apply w-full px-4 py-3 mt-3 border-2 border-gray-200 font-normal ring-0 outline-none shadow-none focus:border-black transition-all duration-300;
 }
 
 .wpcf7-form textarea {
   @apply h-[100px] resize-none;
+}
+
+.wpcf7-form select {
+  @apply appearance-none cursor-pointer h-14;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000000' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  padding-right: 2.5rem;
+}
+
+.wpcf7-form select:focus {
+  @apply border-black;
 }
 
 .wpcf7-form .wpcf7-not-valid-tip {
@@ -199,7 +207,7 @@ ol {
   }
 }
 
-.wpcf7-form input[type="submit"] {
+.wpcf7-form input[type='submit'] {
   @apply bg-black max-w-[200px] block mx-auto w-full text-white hover:scale-105 transition-all duration-300 mt-4 rounded-full;
 }
 

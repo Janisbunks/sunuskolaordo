@@ -13,10 +13,10 @@ $logoWebp = get_field('branding', 'option')[$types[$attributes->get('type', 'pri
       $logoExt = pathinfo($logo['url'], PATHINFO_EXTENSION);
   @endphp
   <picture>
-      @if(isset($logoWebp) && is_array($logoWebp))
-          <source srcset="{{ $logoWebp['url'] }}" type="image/webp">
-      @endif
-      <source srcset="{{ $logo['url'] }}" type="image/{{ $logoExt }}">
-      <img src="{{ $logo['url'] }}" alt="{{$logo['alt']}}" title="{{$logo['title']}}">
+    @if (isset($logoWebp) && is_array($logoWebp))
+      <source srcset="{{ $logoWebp['url'] }}" type="image/webp" />
+    @endif
+    <source srcset="{{ $logo['url'] }}" type="image/{{ $logoExt }}" />
+    <img src="{{ $logo['url'] }}" alt="{{$logo['alt']}}" title="{{$logo['title']}}" />
   </picture>
 </a>

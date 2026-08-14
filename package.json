@@ -35,11 +35,13 @@
     "@types/wordpress__block-editor": "11.5.3",
     "@types/wordpress__blocks": "12.5.3",
     "prettier": "^3.8.1",
+    "prettier-plugin-blade": "^3.2.2",
     "typescript": "5.2.2"
   },
   "dependencies": {
     "@roots/wordpress-hmr": "6.16.1",
     "alpinejs": "3.13.0",
-    "caniuse-lite": "^1.0.30001774"
+    "baseline-browser-mapping": "^2.11.14",
+    "caniuse-lite": "^1.0.30001809"
   }
 }

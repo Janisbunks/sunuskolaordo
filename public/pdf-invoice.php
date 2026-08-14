@@ -16,30 +16,29 @@ $items = [];
 $total = 0;
 
 if ($cart && is_array($cart)) {
-  foreach ($cart as $cartKey => $cartItem) {
-    $productId = $cartItem['product_id'] ?? 0;
-    $size = $cartItem['size'] ?? '';
-    $quantity = (int) ($cartItem['quantity'] ?? 0);
-    $price = (float) ($cartItem['price'] ?? 0);
+    foreach ($cart as $cartKey => $cartItem) {
+        $productId = $cartItem['product_id'] ?? 0;
+        $size = $cartItem['size'] ?? '';
+        $quantity = (int) ($cartItem['quantity'] ?? 0);
+        $price = (float) ($cartItem['price'] ?? 0);
 
-    if ($quantity > 0 && $price > 0) {
-      $product = get_post($productId);
-      if ($product) {
-        $subtotal = $price * $quantity;
-        $total += $subtotal;
-        $items[] = [
-          'name' => $product->post_title,
-          'size' => $size,
-          'qty' => $quantity,
-          'price' => $price,
-          'subtotal' => $subtotal,
-        ];
-      }
+        if ($quantity > 0 && $price > 0) {
+            $product = get_post($productId);
+            if ($product) {
+                $subtotal = $price * $quantity;
+                $total += $subtotal;
+                $items[] = [
+                  'name' => $product->post_title,
+                  'size' => $size,
+                  'qty' => $quantity,
+                  'price' => $price,
+                  'subtotal' => $subtotal,
+                ];
+            }
+        }
     }
-  }
 }
 
-// Get customer data from GET or POST
 $name = sanitize_text_field($_GET['name'] ?? $_POST['name'] ?? '');
 $email = sanitize_email($_GET['email'] ?? $_POST['email'] ?? '');
 $phone = sanitize_text_field($_GET['phone'] ?? $_POST['phone'] ?? '');
@@ -58,7 +57,7 @@ $delivery_label = $delivery_labels[$delivery_method] ?? $delivery_method;
 
 // Validate required fields
 if (empty($name) || empty($email) || empty($items) || empty($delivery_method)) {
-  wp_die('Trūkst nepieciešamo datu. Lūdzu atgriezieties un aizpildiet visus obligātos laukus, un pārliecinieties, ka jūsu grozs nav tukšs.');
+    wp_die('Trūkst nepieciešamo datu. Lūdzu atgriezieties un aizpildiet visus obligātos laukus, un pārliecinieties, ka jūsu grozs nav tukšs.');
 }
 
 // Send notification email to seller
@@ -73,29 +72,28 @@ $lines = [
   "E-pasts: $email",
 ];
 if ($phone) {
-  $lines[] = "Telefons: $phone";
+    $lines[] = "Telefons: $phone";
 }
 if ($notes) {
-  $lines[] = "Piezīmes: $notes";
+    $lines[] = "Piezīmes: $notes";
 }
 $lines[] = "Piegādes veids: $delivery_label";
 if ($delivery_cost > 0) {
-  $lines[] = "Piegādes izmaksas: €" . number_format($delivery_cost, 2);
+    $lines[] = "Piegādes izmaksas: €" . number_format($delivery_cost, 2);
 }
 $lines[] = "";
 $lines[] = "Produkti:";
 
 foreach ($items as $it) {
-  $lines[] = sprintf("- %s (Izmērs: %s) x%d @ €%.2f = €%.2f", $it['name'], $it['size'], $it['qty'], $it['price'], $it['subtotal']);
+    $lines[] = sprintf("- %s (Izmērs: %s) x%d @ €%.2f = €%.2f", $it['name'], $it['size'], $it['qty'], $it['price'], $it['subtotal']);
 }
 $lines[] = "";
 $lines[] = "Preču summa: €" . number_format($total, 2);
 if ($delivery_cost > 0) {
-  $lines[] = "Piegāde: €" . number_format($delivery_cost, 2);
+    $lines[] = "Piegāde: €" . number_format($delivery_cost, 2);
 }
 $lines[] = "KOPĀ: €" . number_format($grand_total, 2);
 
-// Generate unique order number using auto-increment
 $last_order = get_posts([
   'post_type' => 'pasutijumi',
   'posts_per_page' => 1,
@@ -105,11 +103,10 @@ $last_order = get_posts([
 
 $increment = 1;
 if (!empty($last_order)) {
-  // Extract increment from last order title
-  $last_title = $last_order[0]->post_title;
-  if (preg_match('/ORD-\d{8}-(\d{4})/', $last_title, $matches)) {
-    $increment = (int)$matches[1] + 1;
-  }
+    $last_title = $last_order[0]->post_title;
+    if (preg_match('/ORD-\d{8}-(\d{4})/', $last_title, $matches)) {
+        $increment = (int)$matches[1] + 1;
+    }
 }
 
 $order_number = 'ORD-' . date('Ymd') . '-' . str_pad($increment, 4, '0', STR_PAD_LEFT);
@@ -122,34 +119,33 @@ $order_post_id = wp_insert_post([
 ]);
 
 if ($order_post_id && !is_wp_error($order_post_id)) {
-  // Save customer info
-  update_field('order_status', 'sanemts', $order_post_id);
-  update_field('customer_name', $name, $order_post_id);
-  update_field('customer_email', $email, $order_post_id);
-  update_field('customer_phone', $phone, $order_post_id);
-  update_field('delivery_method', $delivery_label, $order_post_id);
-  update_field('delivery_cost', $delivery_cost, $order_post_id);
-  update_field('total_amount', $grand_total, $order_post_id);
-  update_field('order_date', current_time('Y-m-d H:i:s'), $order_post_id);
+    // Save customer info
+    update_field('order_status', 'sanemts', $order_post_id);
+    update_field('customer_name', $name, $order_post_id);
+    update_field('customer_email', $email, $order_post_id);
+    update_field('customer_phone', $phone, $order_post_id);
+    update_field('delivery_method', $delivery_label, $order_post_id);
+    update_field('delivery_cost', $delivery_cost, $order_post_id);
+    update_field('total_amount', $grand_total, $order_post_id);
+    update_field('order_date', current_time('Y-m-d H:i:s'), $order_post_id);
 
-  // Save order items
-  $order_items_data = [];
-  foreach ($items as $it) {
-    $order_items_data[] = [
-      'product_name' => $it['name'],
-      'size' => $it['size'],
-      'quantity' => $it['qty'],
-      'price' => $it['price'],
-      'subtotal' => $it['subtotal'],
-    ];
-  }
-  update_field('order_items', $order_items_data, $order_post_id);
+    // Save order items
+    $order_items_data = [];
+    foreach ($items as $it) {
+        $order_items_data[] = [
+          'product_name' => $it['name'],
+          'size' => $it['size'],
+          'quantity' => $it['qty'],
+          'price' => $it['price'],
+          'subtotal' => $it['subtotal'],
+        ];
+    }
+    update_field('order_items', $order_items_data, $order_post_id);
 }
 
 // Clear cart after successful order
 $_SESSION['cart'] = [];
 
-// Generate HTML for PDF with modern styling
 ob_start(); ?>
 <!DOCTYPE html>
 <html>
@@ -427,7 +423,6 @@ ob_start(); ?>
 <?php
 $html = ob_get_clean();
 
-// Enable remote file access for images
 $options = new \Dompdf\Options();
 $options->set('isRemoteEnabled', true);
 
@@ -436,85 +431,75 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
-// Get the PDF output as string
 $pdf_output = $dompdf->output();
 
-// Save PDF to uploads directory and attach to order post
 if (isset($order_post_id) && $order_post_id && !is_wp_error($order_post_id)) {
-  $upload_dir = wp_upload_dir();
-  $pdf_filename = $order_number . '.pdf';
-  $pdf_filepath = $upload_dir['path'] . '/' . $pdf_filename;
+    $upload_dir = wp_upload_dir();
+    $pdf_filename = $order_number . '.pdf';
+    $pdf_filepath = $upload_dir['path'] . '/' . $pdf_filename;
 
-  // Save PDF file
-  file_put_contents($pdf_filepath, $pdf_output);
+    file_put_contents($pdf_filepath, $pdf_output);
 
-  // Create attachment
-  $attachment = [
-    'guid' => $upload_dir['url'] . '/' . basename($pdf_filepath),
-    'post_mime_type' => 'application/pdf',
-    'post_title' => $order_number . ' - Rēķins',
-    'post_content' => '',
-    'post_status' => 'inherit'
-  ];
+    $attachment = [
+      'guid' => $upload_dir['url'] . '/' . basename($pdf_filepath),
+      'post_mime_type' => 'application/pdf',
+      'post_title' => $order_number . ' - Rēķins',
+      'post_content' => '',
+      'post_status' => 'inherit'
+    ];
 
-  $attach_id = wp_insert_attachment($attachment, $pdf_filepath, $order_post_id);
+    $attach_id = wp_insert_attachment($attachment, $pdf_filepath, $order_post_id);
 
-  // Generate attachment metadata
-  require_once(ABSPATH . 'wp-admin/includes/image.php');
-  $attach_data = wp_generate_attachment_metadata($attach_id, $pdf_filepath);
-  wp_update_attachment_metadata($attach_id, $attach_data);
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+    $attach_data = wp_generate_attachment_metadata($attach_id, $pdf_filepath);
+    wp_update_attachment_metadata($attach_id, $attach_data);
 
-  // Set as featured/attached to the post
-  set_post_thumbnail($order_post_id, $attach_id);
+    set_post_thumbnail($order_post_id, $attach_id);
 
-  // Save PDF to ACF file field for easy access
-  update_field('invoice_pdf', $attach_id, $order_post_id);
+    update_field('invoice_pdf', $attach_id, $order_post_id);
 
-  // Send email to customer with PDF attachment
-  $customer_subject = 'Jūsu pasūtījums #' . $order_number . ' - ' . get_bloginfo('name');
-  $customer_message = "Labdien, " . $name . "!\n\n";
-  $customer_message .= "Paldies par jūsu pasūtījumu!\n\n";
-  $customer_message .= "Pasūtījuma numurs: " . $order_number . "\n";
-  $customer_message .= "Kopējā summa: €" . number_format($grand_total, 2) . "\n";
-  $customer_message .= "Piegādes veids: " . $delivery_label . "\n\n";
-  $customer_message .= "Rēķins ir pievienots šim e-pastam.\n\n";
-  $customer_message .= "Sazināsimies ar jums 1-2 darba dienu laikā, lai apstiprinātu pasūtījumu un piegādes detaļas.\n\n";
-  $customer_message .= "Ar cieņu,\n";
-  $customer_message .= get_bloginfo('name');
+    $customer_subject = 'Jūsu pasūtījums #' . $order_number . ' - ' . get_bloginfo('name');
+    $customer_message = "Labdien, " . $name . "!\n\n";
+    $customer_message .= "Paldies par jūsu pasūtījumu!\n\n";
+    $customer_message .= "Pasūtījuma numurs: " . $order_number . "\n";
+    $customer_message .= "Kopējā summa: €" . number_format($grand_total, 2) . "\n";
+    $customer_message .= "Piegādes veids: " . $delivery_label . "\n\n";
+    $customer_message .= "Rēķins ir pievienots šim e-pastam.\n\n";
+    $customer_message .= "Sazināsimies ar jums 1-2 darba dienu laikā, lai apstiprinātu pasūtījumu un piegādes detaļas.\n\n";
+    $customer_message .= "Ar cieņu,\n";
+    $customer_message .= get_bloginfo('name');
 
-  $customer_headers = ['Content-Type: text/plain; charset=UTF-8'];
-  wp_mail($email, $customer_subject, $customer_message, $customer_headers, [$pdf_filepath]);
+    $customer_headers = ['Content-Type: text/plain; charset=UTF-8'];
+    wp_mail($email, $customer_subject, $customer_message, $customer_headers, [$pdf_filepath]);
 
-  // Send notification email to admin (without PDF)
-  $admin_subject = '[' . get_bloginfo('name') . '] Jauns pasūtījums #' . $order_number;
-  $admin_message = "Jauns pasūtījums ir saņemts!\n\n";
-  $admin_message .= "Pasūtījuma numurs: " . $order_number . "\n";
-  $admin_message .= "Klients: " . $name . "\n";
-  $admin_message .= "E-pasts: " . $email . "\n";
-  if ($phone) {
-    $admin_message .= "Telefons: " . $phone . "\n";
-  }
-  $admin_message .= "Piegādes veids: " . $delivery_label . "\n";
-  if ($delivery_cost > 0) {
-    $admin_message .= "Piegādes izmaksas: €" . number_format($delivery_cost, 2) . "\n";
-  }
-  $admin_message .= "\nProduktи:\n";
-  foreach ($items as $it) {
-    $admin_message .= "- " . $it['name'] . " (Izmērs: " . $it['size'] . ") x" . $it['qty'] . " @ €" . number_format($it['price'], 2) . " = €" . number_format($it['subtotal'], 2) . "\n";
-  }
-  $admin_message .= "\nKopā: €" . number_format($grand_total, 2) . "\n\n";
-  $admin_message .= "Skatīt pasūtījumu admin panelī:\n";
-  $admin_message .= admin_url('post.php?post=' . $order_post_id . '&action=edit');
+    $admin_subject = '[' . get_bloginfo('name') . '] Jauns pasūtījums #' . $order_number;
+    $admin_message = "Jauns pasūtījums ir saņemts!\n\n";
+    $admin_message .= "Pasūtījuma numurs: " . $order_number . "\n";
+    $admin_message .= "Klients: " . $name . "\n";
+    $admin_message .= "E-pasts: " . $email . "\n";
+    if ($phone) {
+        $admin_message .= "Telefons: " . $phone . "\n";
+    }
+    $admin_message .= "Piegādes veids: " . $delivery_label . "\n";
+    if ($delivery_cost > 0) {
+        $admin_message .= "Piegādes izmaksas: €" . number_format($delivery_cost, 2) . "\n";
+    }
+    $admin_message .= "\nProduktи:\n";
+    foreach ($items as $it) {
+        $admin_message .= "- " . $it['name'] . " (Izmērs: " . $it['size'] . ") x" . $it['qty'] . " @ €" . number_format($it['price'], 2) . " = €" . number_format($it['subtotal'], 2) . "\n";
+    }
+    $admin_message .= "\nKopā: €" . number_format($grand_total, 2) . "\n\n";
+    $admin_message .= "Skatīt pasūtījumu admin panelī:\n";
+    $admin_message .= admin_url('post.php?post=' . $order_post_id . '&action=edit');
 
-  $admin_headers = ['Content-Type: text/plain; charset=UTF-8'];
+    $admin_headers = ['Content-Type: text/plain; charset=UTF-8'];
 
-  // Send to both admin emails
-  foreach ($seller_emails as $seller_email) {
-    wp_mail($seller_email, $admin_subject, $admin_message, $admin_headers);
-  }
+
+    foreach ($seller_emails as $seller_email) {
+        wp_mail($seller_email, $admin_subject, $admin_message, $admin_headers);
+    }
 }
 
-// Stream PDF to browser
 $dompdf->stream('rekins.pdf', ['Attachment' => false]);
 
 exit;

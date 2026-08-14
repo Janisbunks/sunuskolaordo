@@ -1,4 +1,4 @@
-@aware(['variant', 'icon'])
+@aware (['variant', 'icon'])
 
 @php
   $classes = match ($variant) {
@@ -16,7 +16,5 @@
 
 <li class="flex items-start gap-3">
   <x-dynamic-component :component="'icon-' . $icon" class="shrink-0 {{ $classes }}" />
-  <div {{ $attributes->merge(['class' => '']) }}>
-    {{ $slot }}
-  </div>
+  <div {{ $attributes->merge(['class' => '']) }}>{{ $slot }}</div>
 </li>

@@ -1,4 +1,4 @@
-@props(['active'])
+@props (['active'])
 
 @php
 $classes = ($active ?? false)
@@ -6,6 +6,4 @@ $classes = ($active ?? false)
   : 'inline-flex text-black text-16p py-3 gap-1 items-center hover:text-gold font-medium transition duration-150 ease-in-out pl-4';
 @endphp
 
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-</a>
+<a {{ $attributes->merge(['class' => $classes]) }}> {{ $slot }} </a>

@@ -94,8 +94,7 @@
         "App\\Providers\\AssetsServiceProvider",
         "App\\Providers\\BlocksServiceProvider",
         "App\\Providers\\ThemeServiceProvider",
-        "App\\Providers\\PostTypesServiceProvider",
-        "App\\Providers\\RankMathServiceProvider"
+        "App\\Providers\\PostTypesServiceProvider"
       ]
     },
     "installer-paths": {

@@ -1,4 +1,4 @@
-@props(['active'])
+@props (['active'])
 
 @php
 $classes = ($active ?? false)
@@ -6,6 +6,4 @@ $classes = ($active ?? false)
   : 'inline-flex group gap-1 items-center text-black';
 @endphp
 
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-</a>
+<a {{ $attributes->merge(['class' => $classes]) }}> {{ $slot }} </a>
